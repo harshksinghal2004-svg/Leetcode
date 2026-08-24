@@ -11,20 +11,22 @@
  */
 class Solution {
 public:
-vector<int>pre_rec(TreeNode* root,vector<int>&ans){
-     if(root==nullptr)
-        return ans;
-        
-        ans.push_back(root->val);
-        pre_rec(root->left,ans);
-          pre_rec(root->right,ans);
-          return ans;
-}
     vector<int> preorderTraversal(TreeNode* root) {
-       
-        vector<int>ans;
-      ans=pre_rec(root,ans);
-          return ans;
-        
+        stack<TreeNode*> st;
+        vector<int> ans;
+        if (root == nullptr)
+            return ans;
+        st.push(root);
+        while (!st.empty()) {
+            TreeNode* a = st.top();
+            ans.push_back(a->val);
+            st.pop();
+            if(a->right!=nullptr)
+            st.push(a->right);
+              if(a->left!=nullptr)
+            st.push(a->left);
+           
+        }
+        return ans ;
     }
 };
