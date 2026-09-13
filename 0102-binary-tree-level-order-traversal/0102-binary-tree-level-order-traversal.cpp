@@ -18,19 +18,20 @@ public:
             return ans;
         queue<TreeNode*> qu;
         qu.push(root);
+
         while (!qu.empty()) {
-            vector<int> level;
-            int size = qu.size();
-            for (int i = 0; i < size; i++) {
-                TreeNode* node = qu.front();
+            vector<int> subset;
+            int n = qu.size();
+            for (int i = 0; i < n; i++) {
+                TreeNode* temp=qu.front();
+                if (temp->left != nullptr)
+                    qu.push(temp->left);
+                if (temp->right != nullptr)
+                    qu.push(temp->right);
+                subset.push_back(temp->val);
                 qu.pop();
-                level.push_back(node->val);
-                if (node->left != nullptr)
-                    qu.push(node->left);
-                if (node->right != nullptr)
-                    qu.push(node->right);
             }
-            ans.push_back(level);
+            ans.push_back(subset);
         }
         return ans;
     }
